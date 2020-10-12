@@ -1,6 +1,9 @@
 <template>
-	<view class="content">
-		<view class="cu-bar search bg-gradual-blue padding-xs">
+	<view >
+		<cu-custom bgColor="bg-gradual-blue" :isBack="false">
+			<block slot="content">首页</block>
+		</cu-custom>
+		<view class="cu-bar search bg-white padding-xs">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
 				<input @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="搜索图片、文章、视频"
@@ -114,7 +117,7 @@
 		},
 		onLoad() {
 			this.TowerSwiper('swiperList');
-			this.getBanner()
+			// this.getBanner()
 		},
 		methods: {
 			InputFocus(e) {

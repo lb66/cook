@@ -10,14 +10,18 @@
 			"style": {
 				"navigationBarTitleText": "分类"
 			}
+		}, {
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "详情"
+			}
+		}, {
+			"path": "pages/list/list",
+			"style": {
+				"navigationBarTitleText": "菜谱"
+			}
 		}
-	    ,{
-            "path" : "pages/detail/detail",
-            "style" : {
-							"navigationBarTitleText": "详情"
-						}
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "菜谱",

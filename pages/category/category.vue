@@ -21,7 +21,7 @@
 					<view class="cu-list bg-white padding">
 						<view class="grid margin-bottom text-center" :class="'col-' + 3">
 							<view class="text-sm padding-xs" v-for="(val,key) in item.list" :key="key" >
-								<text class="text-grey cu-tag round" @tap="toDetail(val.classid)">{{val.name}}</text>
+								<text class="text-grey cu-tag round" @tap="toList(val.classid)">{{val.name}}</text>
 							</view>
 						</view>
 					</view>
@@ -40,7 +40,6 @@
 				mainCur: 0,
 				verticalNavTop: 0,
 				load: true,
-				start:0
 			};
 		},
 		onLoad() {
@@ -50,7 +49,6 @@
 			});
 			let list = [];
 			this.list = list;
-			this.listCur = list[0];
 			this.getList();
 		},
 		onReady() {
@@ -98,8 +96,6 @@
 					success: (res) => {
 						console.log(res.data);
 						that.list = res.data.result.result;
-						// that.listCur = that.list[0];
-						// that.mainList = that.list[that.tabCur].;
 						console.log(that.list)
 					},
 					fail: (err) => {
@@ -107,10 +103,10 @@
 					}
 				});
 			},
-			toDetail(id){
+			toList(classid){
 				var that = this;
 				uni.navigateTo({
-					url: `../detail/detail?id=${id}&start=${this.start}&num=10`
+					url: `../list/list?classid=${classid}`
 				});
 			},
 		},

@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/category/category",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/list/list"
   ],
   "subPackages": [],
   "window": {
@@ -30,5 +31,6 @@
   },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
