@@ -172,7 +172,7 @@ var _default =
 
 
   onLoad: function onLoad() {
-    console.log('list', this.props.list);
+
   },
   methods: {
     toDetail: function toDetail(id) {

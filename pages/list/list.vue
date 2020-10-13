@@ -42,7 +42,7 @@
 				uni.request({
 					url: `https://way.jd.com/jisuapi/byclass?classid=${that.classid}&start=${that.start}&num=10&appkey=3b7be0cd3539afb6c53462690c795f05`,
 					success: (res) => {
-						console.log(res.data);
+						// console.log(res.data);
 						that.relatedList =this.relatedList.concat(res.data.result.result.list) ;
 						console.log(that.relatedList)
 						that.start=that.relatedList.length

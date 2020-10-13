@@ -35,13 +35,15 @@
 		"color": "#707070",
 		"selectedColor": "#d81e06",
 		"list": [{
-				"pagePath": "pages/index/index",
-				"text": "首页"
-			},
-			{
-				"pagePath": "pages/category/category",
-				"text": "分类"
-			}
-		]
+			"pagePath": "pages/index/index",
+			"iconPath": "static/icon/home.png",
+			"selectedIconPath": "static/icon/home_select.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/category/category",
+			"iconPath": "static/icon/category.png",
+			"selectedIconPath": "static/icon/category_select.png",
+			"text": "分类"
+		}]
 	}
 }

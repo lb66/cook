@@ -20,7 +20,7 @@
 				</view>
 			</swiper-item>
 		</swiper>
-		<!-- 列表 -->
+		<!-- 宫格图 -->
 		<view class="cu-list grid no-border" :class="['col-' + gridCol]">
 			<view class="cu-item" v-for="(item,index) in cuIconList" :key="index">
 				<image :src="item.url" mode="widthFix"></image>
@@ -83,7 +83,7 @@
 				}],
 				towerStart: 0,
 				direction: '',
-				// 列表
+				// 宫格图
 				cuIconList: [{
 						url: '../../static/logo.png',
 						title: '1'

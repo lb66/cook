@@ -32,7 +32,7 @@
 			},
 		},
 		onLoad() {
-			console.log('list', this.props.list)
+			
 		},
 		methods: {
 			toDetail(id) {
