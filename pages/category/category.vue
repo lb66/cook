@@ -52,7 +52,7 @@
 			this.getList();
 		},
 		onReady() {
-			uni.hideLoading()
+			
 		},
 		methods: {
 			TabSelect(e) {
@@ -94,17 +94,18 @@
 				uni.request({
 					url: 'https://way.jd.com/jisuapi/recipe_class?appkey=3b7be0cd3539afb6c53462690c795f05',
 					success: (res) => {
-						console.log(res.data);
+						// console.log(res.data);
 						that.list = res.data.result.result;
-						console.log(that.list)
+						// console.log(that.list)
+						uni.hideLoading()
 					},
 					fail: (err) => {
 						console.log(err)
+						uni.hideLoading()
 					}
 				});
 			},
 			toList(classid){
-				var that = this;
 				uni.navigateTo({
 					url: `../list/list?classid=${classid}`
 				});

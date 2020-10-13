@@ -53,7 +53,7 @@
 			this.getDetail()
 		},
 		onReady() {
-			uni.hideLoading()
+			
 		},
 		methods: {
 			getDetail() {
@@ -61,12 +61,13 @@
 				uni.request({
 					url: `https://way.jd.com/jisuapi/detail?id=${that.id}&appkey=3b7be0cd3539afb6c53462690c795f05`,
 					success: (res) => {
-						console.log(res.data.result.result);
+						// console.log(res.data.result.result);
 						that.detail = res.data.result.result
-
+						uni.hideLoading()
 					},
 					fail: (err) => {
 						console.log(err)
+						uni.hideLoading()
 					}
 				});
 			},

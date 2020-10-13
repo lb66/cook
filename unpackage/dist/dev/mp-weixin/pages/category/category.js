@@ -184,7 +184,7 @@ var _default =
     this.getList();
   },
   onReady: function onReady() {
-    uni.hideLoading();
+
   },
   methods: {
     TabSelect: function TabSelect(e) {
@@ -226,17 +226,18 @@ var _default =
       uni.request({
         url: 'https://way.jd.com/jisuapi/recipe_class?appkey=3b7be0cd3539afb6c53462690c795f05',
         success: function success(res) {
-          console.log(res.data);
+          // console.log(res.data);
           that.list = res.data.result.result;
-          console.log(that.list);
+          // console.log(that.list)
+          uni.hideLoading();
         },
         fail: function fail(err) {
           console.log(err);
+          uni.hideLoading();
         } });
 
     },
     toList: function toList(classid) {
-      var that = this;
       uni.navigateTo({
         url: "../list/list?classid=".concat(classid) });
 

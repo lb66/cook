@@ -128,7 +128,24 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -151,13 +168,40 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _default =
 {
   data: function data() {
-    return {};
-
+    return {
+      id: 0,
+      detail: {} };
 
   },
   onLoad: function onLoad(options) {
+    uni.showLoading({
+      title: '加载中...',
+      mask: true });
+
     console.log(options);
-  } };exports.default = _default;
+    this.id = options.id;
+    this.getDetail();
+  },
+  onReady: function onReady() {
+
+  },
+  methods: {
+    getDetail: function getDetail() {
+      var that = this;
+      uni.request({
+        url: "https://way.jd.com/jisuapi/detail?id=".concat(that.id, "&appkey=3b7be0cd3539afb6c53462690c795f05"),
+        success: function success(res) {
+          // console.log(res.data.result.result);
+          that.detail = res.data.result.result;
+          uni.hideLoading();
+        },
+        fail: function fail(err) {
+          console.log(err);
+          uni.hideLoading();
+        } });
+
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

@@ -150,7 +150,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       classid: 0,
       relatedList: [],
-      start: 0 };
+      start: 0,
+      keyword: '' };
 
   },
   onLoad: function onLoad(options) {
@@ -159,14 +160,19 @@ __webpack_require__.r(__webpack_exports__);
       mask: true });
 
     console.log(options);
-    this.classid = options.classid;
-    this.get2ndList();
-  },
-  onReady: function onReady() {
-    uni.hideLoading();
+    if (options.classid) {
+      this.classid = options.classid;
+      this.get2ndList();
+    };
+    if (options.keyword) {
+      this.keyword = options.keyword;
+      this.getSearchList();
+    }
   },
   onReachBottom: function onReachBottom() {
-    this.get2ndList();
+    if (this.classid !== 0) {
+      this.get2ndList();
+    }
   },
   methods: {
     get2ndList: function get2ndList() {var _this = this;
@@ -174,13 +180,40 @@ __webpack_require__.r(__webpack_exports__);
       uni.request({
         url: "https://way.jd.com/jisuapi/byclass?classid=".concat(that.classid, "&start=").concat(that.start, "&num=10&appkey=3b7be0cd3539afb6c53462690c795f05"),
         success: function success(res) {
-          console.log(res.data);
+          // console.log(res.data);
           that.relatedList = _this.relatedList.concat(res.data.result.result.list);
-          console.log(that.relatedList);
+          // console.log(that.relatedList)
           that.start = that.relatedList.length;
+          uni.hideLoading();
         },
         fail: function fail(err) {
           console.log(err);
+          uni.hideLoading();
+        } });
+
+    },
+    getSearchList: function getSearchList() {
+      var that = this;
+      uni.request({
+        url: "https://way.jd.com/jisuapi/search?keyword=".concat(that.keyword, "&num=20&appkey=3b7be0cd3539afb6c53462690c795f05"),
+        success: function success(res) {
+          that.relatedList = res.data.result.result.list;
+          if (!res.data.result.result.list) {
+            uni.showModal({
+              content: "暂无相关内容",
+              showCancel: false,
+              confirmText: '返回',
+              success: function success() {
+                uni.navigateBack({});
+
+              } });
+
+          }
+          uni.hideLoading();
+        },
+        fail: function fail(err) {
+          console.log(err);
+          uni.hideLoading();
         } });
 
     } } };exports.default = _default;

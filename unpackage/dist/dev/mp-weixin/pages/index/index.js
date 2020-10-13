@@ -135,69 +135,57 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var List = function List() {__webpack_require__.e(/*! require.ensure | components/list */ "components/list").then((function () {return resolve(__webpack_require__(/*! ../../components/list.vue */ 46));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
+  components: {
+    List: List },
+
   data: function data() {
     return {
+      dailyList: [],
+      start: 100,
       InputBottom: 0,
       // 轮播图
       cardCur: 0,
@@ -220,41 +208,47 @@ var _default =
 
       towerStart: 0,
       direction: '',
-      // 列表
+      // 宫格图
       cuIconList: [{
-        url: '../../static/logo.png',
-        title: '1' },
+        url: '../../static/icon/icon_doughnut.png',
+        title: '甜品',
+        classid: '339' },
 
       {
-        url: '../../static/logo.png',
-        title: '2' },
+        url: '../../static/icon/icon_juice.png',
+        title: '饮品',
+        classid: '355' },
 
       {
-        url: '../../static/logo.png',
-        title: '3' },
+        url: '../../static/icon/icon_kebabs.png',
+        title: '烧烤',
+        classid: '365' },
 
       {
-        url: '../../static/logo.png',
-        title: '4' },
+        url: '../../static/icon/icon_noodle.png',
+        title: '面条',
+        classid: '326' },
 
       {
-        url: '../../static/logo.png',
-        title: '5' },
+        url: '../../static/icon/icon_salad.png',
+        title: '素菜',
+        classid: '307' },
 
       {
-        url: '../../static/logo.png',
-        title: '6' }],
+        url: '../../static/icon/icon_seafood.png',
+        title: '海鲜',
+        classid: '312' }],
 
 
-      gridCol: 3,
-      // bar
-      TabCur: 0,
-      scrollLeft: 0 };
+      gridCol: 3 };
 
   },
   onLoad: function onLoad() {
     this.TowerSwiper('swiperList');
-    // this.getBanner()
+    this.getDailyList();
+  },
+  onReachBottom: function onReachBottom() {
+    this.getDailyList();
   },
   methods: {
     InputFocus: function InputFocus(e) {
@@ -275,22 +269,25 @@ var _default =
       }
       this.swiperList = list;
     },
-    // bar
-    tabSelect: function tabSelect(e) {
-      this.TabCur = e.currentTarget.dataset.id;
-      this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60;
-    },
-    //路由
-    toDetail: function toDetail(url) {
+    toSearch: function toSearch() {
       uni.navigateTo({
-        url: url });
+        url: "/pages/search/search" });
 
     },
-    getBanner: function getBanner() {
+    toList: function toList(classid) {
+      uni.navigateTo({
+        url: "../list/list?classid=".concat(classid) });
+
+    },
+    getDailyList: function getDailyList() {var _this = this;
+      var that = this;
+      var id = new Date().getDate();
       uni.request({
-        url: '',
+        url: "https://way.jd.com/jisuapi/byclass?classid=".concat(id, "&start=").concat(that.start, "&num=10&appkey=3b7be0cd3539afb6c53462690c795f05"),
         success: function success(res) {
-          console.log(res);
+          that.dailyList = _this.dailyList.concat(res.data.result.result.list);
+          // console.log(that.dailyList)
+          that.start = that.dailyList.length;
         },
         fail: function fail(err) {
           console.log(err);

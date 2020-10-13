@@ -1,12 +1,12 @@
 <template>
-	<view >
+	<view>
 		<cu-custom bgColor="bg-gradual-blue" :isBack="false">
 			<block slot="content">首页</block>
 		</cu-custom>
 		<view class="cu-bar search bg-white padding-xs">
-			<view class="search-form round">
+			<view class="search-form round padding-xs" @tap='toSearch'>
 				<text class="cuIcon-search"></text>
-				<input @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="搜索图片、文章、视频"
+				<input @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="搜索菜谱、食材"
 				 confirm-type="search"></input>
 			</view>
 		</view>
@@ -21,53 +21,41 @@
 			</swiper-item>
 		</swiper>
 		<!-- 宫格图 -->
-		<view class="cu-list grid no-border" :class="['col-' + gridCol]">
-			<view class="cu-item" v-for="(item,index) in cuIconList" :key="index">
+		<view class="cu-list grid no-border" :class="['col-' + gridCol]" >
+			<view class="cu-item" v-for="(item,index) in cuIconList" :key="index" @tap="toList(item.classid)">
 				<image :src="item.url" mode="widthFix"></image>
 				<text>{{item.title}}</text>
 			</view>
 		</view>
 		<!-- bar -->
-		<scroll-view scroll-x class="bg-white nav margin-top">
-			<view class="flex text-center">
-				<view class="cu-item flex-sub" :class="index==TabCur?'text-orange cur':''" v-for="(item,index) in 3" :key="index"
-				 @tap="tabSelect" :data-id="index">
-					{{index===0 ? "最新": index===1 ? "热门":''}}
-				</view>
-			</view>
-		</scroll-view>
-		<!-- card -->
-		<view class="cu-card article no-card" @tap="toDetail('../detail/detail?id='+111)">
-			<view class="cu-item shadow">
-				<view class="title">
-					<view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
-				</view>
-				<view class="content">
-					<image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
-					<view class="desc">
-						<view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
-						<view>
-							<view class="cu-tag bg-red light sm round">正义天使</view>
-							<view class="cu-tag bg-green light sm round">史诗</view>
-						</view>
-					</view>
-				</view>
+		<view class="cu-bar justify-center bg-white margin-top">
+			<view class="action border-title">
+				<text class="text-xl text-bold text-blue">每日推荐</text>
+				<text class="bg-gradual-blue" style="width:3rem"></text>
 			</view>
 		</view>
+		<!-- card -->
+		<List :list='dailyList' />
 	</view>
 </template>
 
 <script>
+	import List from '../../components/list.vue'
 	export default {
+		components: {
+			List
+		},
 		data() {
 			return {
+				dailyList: [],
+				start: 100,
 				InputBottom: 0,
 				// 轮播图
 				cardCur: 0,
 				swiperList: [{
 					id: 0,
 					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg',
 				}, {
 					id: 1,
 					type: 'image',
@@ -85,39 +73,45 @@
 				direction: '',
 				// 宫格图
 				cuIconList: [{
-						url: '../../static/logo.png',
-						title: '1'
+						url: '../../static/icon/icon_doughnut.png',
+						title: '甜品',
+						classid:'339'
 					},
 					{
-						url: '../../static/logo.png',
-						title: '2'
+						url: '../../static/icon/icon_juice.png',
+						title: '饮品',
+						classid:'355'
 					},
 					{
-						url: '../../static/logo.png',
-						title: '3'
+						url: '../../static/icon/icon_kebabs.png',
+						title: '烧烤',
+						classid:'365'
 					},
 					{
-						url: '../../static/logo.png',
-						title: '4'
+						url: '../../static/icon/icon_noodle.png',
+						title: '面条',
+						classid:'326'
 					},
 					{
-						url: '../../static/logo.png',
-						title: '5'
+						url: '../../static/icon/icon_salad.png',
+						title: '素菜',
+						classid:'307'
 					},
 					{
-						url: '../../static/logo.png',
-						title: '6'
+						url: '../../static/icon/icon_seafood.png',
+						title: '海鲜',
+						classid:'312'
 					},
 				],
 				gridCol: 3,
-				// bar
-				TabCur: 0,
-				scrollLeft: 0
 			};
 		},
 		onLoad() {
 			this.TowerSwiper('swiperList');
-			// this.getBanner()
+			this.getDailyList()
+		},
+		onReachBottom() {
+			this.getDailyList()
 		},
 		methods: {
 			InputFocus(e) {
@@ -138,22 +132,25 @@
 				}
 				this.swiperList = list
 			},
-			// bar
-			tabSelect(e) {
-				this.TabCur = e.currentTarget.dataset.id;
-				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
-			},
-			//路由
-			toDetail(url) {
+			toSearch(){
 				uni.navigateTo({
-					url: url
+					url:"/pages/search/search"
+				})
+			},
+			toList(classid){
+				uni.navigateTo({
+					url: `../list/list?classid=${classid}`
 				});
 			},
-			getBanner() {
+			getDailyList() {
+				let that = this;
+				let id=new Date().getDate()
 				uni.request({
-					url: '',
+					url: `https://way.jd.com/jisuapi/byclass?classid=${id}&start=${that.start}&num=10&appkey=3b7be0cd3539afb6c53462690c795f05`,
 					success: (res) => {
-						console.log(res);
+						that.dailyList = this.dailyList.concat(res.data.result.result.list);
+						// console.log(that.dailyList)
+						that.start = that.dailyList.length
 					},
 					fail: (err) => {
 						console.log(err)
