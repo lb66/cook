@@ -113,6 +113,12 @@
 		onReachBottom() {
 			this.getDailyList()
 		},
+		onPullDownRefresh() {
+			this.TowerSwiper('swiperList');
+			this.start=0;
+			this.dailyList=[];
+			this.getDailyList();
+		},
 		methods: {
 			InputFocus(e) {
 				this.InputBottom = e.detail.height
@@ -151,6 +157,7 @@
 						that.dailyList = this.dailyList.concat(res.data.result.result.list);
 						// console.log(that.dailyList)
 						that.start = that.dailyList.length
+						uni.stopPullDownRefresh()
 					},
 					fail: (err) => {
 						console.log(err)

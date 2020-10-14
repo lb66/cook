@@ -4,10 +4,11 @@
 			<block slot="backText">返回</block>
 			<block slot="content">详情</block>
 		</cu-custom>
-		<view class="flex-sub ">
-			<image :src="detail.pic" mode="" style="width: 100%;"></image>
-			<view class="text-xl padding">
-				<text class="text-black text-bold">{{detail.name}}</text>
+		<view class="flex-sub bg-white">
+			<image :src="detail.pic" style="width: 100%;"></image>
+			<view class="padding flex justify-between">
+				<text class="text-xl text-black text-bold">{{detail.name}}</text>
+				<uni-fav :checked="checked" @click="onClick"></uni-fav>
 			</view>
 			<view class="padding solid-bottom" v-html="detail.content"></view>
 			<view class="padding solid-bottom">
@@ -36,14 +37,22 @@
 </template>
 
 <script>
+	import uniFav from '../../components/uni-fav.vue'
 	export default {
+		components: {
+			uniFav
+		},
 		data() {
 			return {
 				id: 0,
-				detail: {}
+				detail: {},
+				checked: false
 			};
 		},
 		onLoad(options) {
+			if (uni.getStorageSync('collection') === '') {
+				uni.setStorageSync('collection', [])
+			}
 			uni.showLoading({
 				title: '加载中...',
 				mask: true
@@ -52,24 +61,48 @@
 			this.id = options.id
 			this.getDetail()
 		},
-		onReady() {
-			
-		},
 		methods: {
 			getDetail() {
-				var that = this;
+				let that = this;
 				uni.request({
 					url: `https://way.jd.com/jisuapi/detail?id=${that.id}&appkey=3b7be0cd3539afb6c53462690c795f05`,
 					success: (res) => {
 						// console.log(res.data.result.result);
 						that.detail = res.data.result.result
 						uni.hideLoading()
+						// 初始是否已收藏
+						const collection = uni.getStorageSync('collection')
+						for (let i = 0; i < collection.length; i++) {
+							if (collection[i].id === this.detail.id) {
+								this.checked = true
+								break
+							}
+						}						
 					},
-					fail: (err) => {
-						console.log(err)
-						uni.hideLoading()
-					}
 				});
+			},
+			//收藏
+			onClick() {
+				this.checked = !this.checked
+				let collection = uni.getStorageSync('collection')
+				if (this.checked) {
+					collection.unshift(this.detail)
+					wx.setStorage({
+						key: 'collection',
+						data: collection,
+					})
+				} else {
+					for (let i = 0; i < collection.length; i++) {
+						if (collection[i].id === this.detail.id) {
+							collection.splice(i,1)
+							break
+						}
+					}						
+					wx.setStorage({
+						key: 'collection',
+						data: collection,
+					})
+				}
 			},
 		}
 	}

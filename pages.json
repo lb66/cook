@@ -3,7 +3,8 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh":true
 			}
 		}, {
 			"path": "pages/category/category",
@@ -26,7 +27,19 @@
 				"navigationBarTitleText": "搜索"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/my/my",
+            "style" : {
+							"navigationBarTitleText": "我的"
+						}
+        }
+        ,{
+            "path" : "pages/myFavor/myFavor",
+            "style" : {
+							"navigationBarTitleText": "收藏"
+						}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "菜谱",
@@ -38,17 +51,23 @@
 		"borderStyle": "black",
 		"backgroundColor": "#FFFFFF",
 		"color": "#707070",
-		"selectedColor": "#d81e06",
+		"selectedColor": "#058bf3",
 		"list": [{
 			"pagePath": "pages/index/index",
-			"iconPath": "static/icon/home.png",
-			"selectedIconPath": "static/icon/home_select.png",
+			"iconPath": "static/icon-tabBar/a2.png",
+			"selectedIconPath": "static/icon-tabBar/a1.png",
 			"text": "首页"
 		}, {
 			"pagePath": "pages/category/category",
-			"iconPath": "static/icon/category.png",
-			"selectedIconPath": "static/icon/category_select.png",
+			"iconPath": "static/icon-tabBar/b2.png",
+			"selectedIconPath": "static/icon-tabBar/b1.png",
 			"text": "分类"
+		},{
+			"pagePath": "pages/my/my",
+			"iconPath": "static/icon-tabBar/d2.png",
+			"selectedIconPath": "static/icon-tabBar/d1.png",
+			"text": "我的"
+			
 		}]
 	}
 }
