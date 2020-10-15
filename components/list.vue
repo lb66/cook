@@ -6,7 +6,7 @@
 					<image :src="item.pic" mode="aspectFill"></image>
 					<view class="desc">
 						<view class="text-bold  text-lg">{{item.name}}</view>
-						<view class="text-content">{{item.content}}</view>
+						<view class="text-content" v-html="item.content"></view>
 						<view>
 							<view class="cu-tag bg-red light sm round">{{item.tag.split(',')[0]}}</view>
 							<view class="cu-tag bg-green light sm round">{{item.tag.split(',')[1]}}</view>

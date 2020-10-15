@@ -173,6 +173,7 @@ var _default =
     }
   },
   onShow: function onShow() {
+    this.keyword = '';
     this.historyWords = uni.getStorageSync('history');
   },
   methods: {
@@ -187,11 +188,10 @@ var _default =
       this.keyword = e.detail.value;
     },
     onHIstorySearch: function onHIstorySearch(e) {
-      console.log(e.currentTarget.dataset.name);
       this.keyword = e.currentTarget.dataset.name;
       uni.navigateTo({
-        url: "../list/list?keyword=".concat(this.keyword) }).
-      then(this.keyword = '');
+        url: "../list/list?keyword=".concat(this.keyword) });
+
     },
     onSearch: function onSearch() {
       if (this.keyword !== '') {

@@ -177,7 +177,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 {
   components: {
     List: List },
@@ -191,19 +190,15 @@ __webpack_require__.r(__webpack_exports__);
       cardCur: 0,
       swiperList: [{
         id: 0,
-        type: 'image',
         url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg' },
       {
         id: 1,
-        type: 'image',
         url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big37006.jpg' },
       {
         id: 2,
-        type: 'image',
         url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg' },
       {
         id: 3,
-        type: 'image',
         url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg' }],
 
       towerStart: 0,
@@ -263,12 +258,6 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
-    InputFocus: function InputFocus(e) {
-      this.InputBottom = e.detail.height;
-    },
-    InputBlur: function InputBlur(e) {
-      this.InputBottom = 0;
-    },
     // 轮播
     cardSwiper: function cardSwiper(e) {
       this.cardCur = e.detail.current;

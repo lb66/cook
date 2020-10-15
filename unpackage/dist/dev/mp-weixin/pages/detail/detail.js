@@ -183,7 +183,7 @@ __webpack_require__.r(__webpack_exports__);
     console.log(event);
     return {
       title: this.detail.name,
-      path: "/pages/detail/detail?id=".concat(this._id),
+      path: "/pages/detail/detail?id=".concat(this.id),
       imageUrl: this.detail.pic };
 
   },

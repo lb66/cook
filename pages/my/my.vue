@@ -4,7 +4,7 @@
 			<view class="padding-xl text-white text-center">
 				<view class="avatar-img">
 					<open-data type="userAvatarUrl"></open-data>
-					<!-- #ifdef H5 -->
+					<!-- #ifdef H5 || APP-PLUS -->
 					<image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg" mode="aspectFill"></image>
 					<!-- #endif -->
 				</view>

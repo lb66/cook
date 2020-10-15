@@ -53,7 +53,7 @@
 			console.log(event)
 			return {
 				title: this.detail.name,
-				path: `/pages/detail/detail?id=${this._id}`,
+				path: `/pages/detail/detail?id=${this.id}`,
 				imageUrl:this.detail.pic
 			}
 		},

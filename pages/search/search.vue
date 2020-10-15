@@ -7,8 +7,8 @@
 		<view class="cu-bar search bg-white">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
-				<input @input="onInput" @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="请输入菜谱、食材"
-				 confirm-type="search"></input>
+				<input :value="keyword" @input="onInput" @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="请输入菜谱、食材"
+				 auto-focus></input>
 			</view>
 			<view class="action">
 				<button @tap="onSearch" class="cu-btn bg-green shadow-blur round">搜索</button>
@@ -43,6 +43,7 @@
 			}
 		},
 		onShow() {
+			this.keyword=''
 			this.historyWords = uni.getStorageSync('history')
 		},
 		methods: {
@@ -57,11 +58,10 @@
 				this.keyword = e.detail.value
 			},
 			onHIstorySearch(e){
-				console.log(e.currentTarget.dataset.name)
 				this.keyword=e.currentTarget.dataset.name
 				uni.navigateTo({
 					url: `../list/list?keyword=${this.keyword}`
-				}).then(this.keyword='')
+				})
 			},
 			onSearch() {
 				if (this.keyword !== '') {
