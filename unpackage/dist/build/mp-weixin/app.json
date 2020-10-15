@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/detail/detail",
+    "pages/list/list",
+    "pages/search/search",
+    "pages/my/my",
+    "pages/myFavor/myFavor"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "菜谱",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "borderStyle": "black",
+    "backgroundColor": "#FFFFFF",
+    "color": "#707070",
+    "selectedColor": "#058bf3",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/icon-tabBar/a2.png",
+        "selectedIconPath": "static/icon-tabBar/a1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "iconPath": "static/icon-tabBar/b2.png",
+        "selectedIconPath": "static/icon-tabBar/b1.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/icon-tabBar/d2.png",
+        "selectedIconPath": "static/icon-tabBar/d1.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

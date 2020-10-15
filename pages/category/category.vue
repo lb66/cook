@@ -47,12 +47,7 @@
 				title: '加载中...',
 				mask: true
 			});
-			let list = [];
-			this.list = list;
 			this.getList();
-		},
-		onReady() {
-			
 		},
 		methods: {
 			TabSelect(e) {
@@ -97,6 +92,9 @@
 						// console.log(res.data);
 						that.list = res.data.result.result;
 						// console.log(that.list)
+						for (let i = 0; i < that.list.length; i++) {
+							that.list[i].id = i;
+						}
 						uni.hideLoading()
 					},
 					fail: (err) => {

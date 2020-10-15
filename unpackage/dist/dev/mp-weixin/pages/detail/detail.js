@@ -128,52 +128,69 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniFav = function uniFav() {__webpack_require__.e(/*! require.ensure | components/uni-fav */ "components/uni-fav").then((function () {return resolve(__webpack_require__(/*! ../../components/uni-fav.vue */ 73));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
+  components: {
+    uniFav: uniFav },
+
   data: function data() {
     return {
       id: 0,
-      detail: {} };
+      detail: {},
+      checked: false };
+
+  },
+  onShareAppMessage: function onShareAppMessage(event) {
+    console.log(event);
+    return {
+      title: this.detail.name,
+      path: "/pages/detail/detail?id=".concat(this._id),
+      imageUrl: this.detail.pic };
 
   },
   onLoad: function onLoad(options) {
+    if (uni.getStorageSync('collection') === '') {
+      uni.setStorageSync('collection', []);
+    }
     uni.showLoading({
       title: '加载中...',
       mask: true });
@@ -182,11 +199,8 @@ var _default =
     this.id = options.id;
     this.getDetail();
   },
-  onReady: function onReady() {
-
-  },
   methods: {
-    getDetail: function getDetail() {
+    getDetail: function getDetail() {var _this = this;
       var that = this;
       uni.request({
         url: "https://way.jd.com/jisuapi/detail?id=".concat(that.id, "&appkey=3b7be0cd3539afb6c53462690c795f05"),
@@ -194,12 +208,39 @@ var _default =
           // console.log(res.data.result.result);
           that.detail = res.data.result.result;
           uni.hideLoading();
-        },
-        fail: function fail(err) {
-          console.log(err);
-          uni.hideLoading();
+          // 初始是否已收藏
+          var collection = uni.getStorageSync('collection');
+          for (var i = 0; i < collection.length; i++) {
+            if (collection[i].id === _this.detail.id) {
+              _this.checked = true;
+              break;
+            }
+          }
         } });
 
+    },
+    //收藏
+    onClick: function onClick() {
+      this.checked = !this.checked;
+      var collection = uni.getStorageSync('collection');
+      if (this.checked) {
+        collection.unshift(this.detail);
+        wx.setStorage({
+          key: 'collection',
+          data: collection });
+
+      } else {
+        for (var i = 0; i < collection.length; i++) {
+          if (collection[i].id === this.detail.id) {
+            collection.splice(i, 1);
+            break;
+          }
+        }
+        wx.setStorage({
+          key: 'collection',
+          data: collection });
+
+      }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

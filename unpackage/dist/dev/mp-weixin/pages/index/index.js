@@ -135,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var List = function List() {__webpack_require__.e(/*! require.ensure | components/list */ "components/list").then((function () {return resolve(__webpack_require__(/*! ../../components/list.vue */ 46));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var List = function List() {__webpack_require__.e(/*! require.ensure | components/list */ "components/list").then((function () {return resolve(__webpack_require__(/*! ../../components/list.vue */ 66));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -250,6 +250,18 @@ __webpack_require__.r(__webpack_exports__);
   onReachBottom: function onReachBottom() {
     this.getDailyList();
   },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.TowerSwiper('swiperList');
+    this.start = 0;
+    this.dailyList = [];
+    this.getDailyList();
+  },
+  onShareAppMessage: function onShareAppMessage() {
+    return {
+      title: '一份菜谱',
+      path: '/pages/index/index' };
+
+  },
   methods: {
     InputFocus: function InputFocus(e) {
       this.InputBottom = e.detail.height;
@@ -288,6 +300,7 @@ __webpack_require__.r(__webpack_exports__);
           that.dailyList = _this.dailyList.concat(res.data.result.result.list);
           // console.log(that.dailyList)
           that.start = that.dailyList.length;
+          uni.stopPullDownRefresh();
         },
         fail: function fail(err) {
           console.log(err);

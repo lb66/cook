@@ -179,12 +179,7 @@ var _default =
       title: '加载中...',
       mask: true });
 
-    var list = [];
-    this.list = list;
     this.getList();
-  },
-  onReady: function onReady() {
-
   },
   methods: {
     TabSelect: function TabSelect(e) {
@@ -229,6 +224,9 @@ var _default =
           // console.log(res.data);
           that.list = res.data.result.result;
           // console.log(that.list)
+          for (var i = 0; i < that.list.length; i++) {
+            that.list[i].id = i;
+          }
           uni.hideLoading();
         },
         fail: function fail(err) {

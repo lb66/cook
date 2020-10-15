@@ -14,10 +14,10 @@
 				<button @tap="onSearch" class="cu-btn bg-green shadow-blur round">搜索</button>
 			</view>
 		</view>
-		<view class="padding bg-white margin-bottom" v-if="historyWords.length>0">
+		<view class="padding bg-white" v-if="historyWords.length>0">
 			<text class=" text-bold  text-lg ">历史搜索</text>
-			<view class="flex margin-bottom margin-top justify-start">
-				<view @tap='onHIstorySearch' :data-name='item' v-for="(item,index) in historyWords" :key="index" class="bg-grey cu-tag round padding">
+			<view class="flex margin-bottom justify-start flex-wrap">
+				<view @tap='onHIstorySearch' :data-name='item' v-for="(item,index) in historyWords" :key="index" class="bg-grey cu-tag round margin-top ">
 					<view >						
 						{{item}}
 					</view>
@@ -66,9 +66,10 @@
 			onSearch() {
 				if (this.keyword !== '') {
 					const history = uni.getStorageSync('history')
+					console.log(history[0])
 					let bHave = false //判断是否已存在，不会重复存入相同歌曲
 					for (let i = 0; i < history.length; i++) {
-						if (history[i].keyword === this.keyword) {
+						if (history[i] === this.keyword) {
 							bHave = true
 							break
 						}

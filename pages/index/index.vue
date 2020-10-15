@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-gradual-blue" :isBack="false">
-			<block slot="content">首页</block>
+			<block slot="content">一份菜谱</block>
 		</cu-custom>
 		<view class="cu-bar search bg-white padding-xs">
 			<view class="search-form round padding-xs" @tap='toSearch'>
@@ -118,6 +118,12 @@
 			this.start=0;
 			this.dailyList=[];
 			this.getDailyList();
+		},
+		onShareAppMessage() {
+			return {
+				title: '一份菜谱',
+				path: '/pages/index/index'
+			}
 		},
 		methods: {
 			InputFocus(e) {

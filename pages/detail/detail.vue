@@ -49,6 +49,14 @@
 				checked: false
 			};
 		},
+		onShareAppMessage(event) {
+			console.log(event)
+			return {
+				title: this.detail.name,
+				path: `/pages/detail/detail?id=${this._id}`,
+				imageUrl:this.detail.pic
+			}
+		},
 		onLoad(options) {
 			if (uni.getStorageSync('collection') === '') {
 				uni.setStorageSync('collection', [])

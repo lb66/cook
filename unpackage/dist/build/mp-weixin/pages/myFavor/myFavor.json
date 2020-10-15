@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "收藏",
+  "usingComponents": {
+    "list": "/components/list"
+  }
+}

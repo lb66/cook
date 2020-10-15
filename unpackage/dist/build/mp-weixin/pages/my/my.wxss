@@ -1,0 +1,1 @@
+.avatar-img{width:200rpx;height:200rpx;display:block;overflow:hidden;border:6rpx solid #fff;-webkit-border-radius:50%;border-radius:50%}
