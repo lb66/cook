@@ -1,5 +1,5 @@
 {
-    "name" : "cookbook",
+    "name" : "cookbook-1",
     "appid" : "__UNI__0B9211E",
     "description" : "",
     "versionName" : "1.0.0",
@@ -61,7 +61,8 @@
     "mp-weixin" : {
         "appid" : "wx5d74d6e641c6a2bb",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "minified" : false
         },
         "usingComponents" : true
     },
@@ -76,5 +77,10 @@
     },
     "uniStatistics" : {
         "enable" : false
+    },
+    "h5" : {
+        "uniStatistics" : {
+            "enable" : false
+        }
     }
 }

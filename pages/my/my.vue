@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="bg-img flex align-center justify-center" style="background-image: url('../../static/bg.jpeg');height: 600upx;">
+		<view class="bg-gradual-blue flex align-center justify-center" style="height: 600upx;">
 			<view class="padding-xl text-white text-center">
 				<view class="avatar-img">
 					<open-data type="userAvatarUrl"></open-data>

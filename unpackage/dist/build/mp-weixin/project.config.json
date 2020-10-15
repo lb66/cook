@@ -4,12 +4,12 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"enhance": false,
 		"postcss": true,
 		"preloadBackgroundData": false,
-		"minified": true,
+		"minified": false,
 		"newFeature": false,
 		"coverView": true,
 		"nodeModules": false,
@@ -33,7 +33,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "",
 	"appid": "wx5d74d6e641c6a2bb",
-	"projectname": "cookbook",
+	"projectname": "cookbook-1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
